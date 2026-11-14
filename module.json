@@ -1,6 +1,6 @@
 {
     "name": "loan-expenses",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "kernel": "^1.21.0",
     "solves": "expenses.management",
     "type": "module",
