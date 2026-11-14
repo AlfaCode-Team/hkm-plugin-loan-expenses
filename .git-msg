@@ -1,0 +1,11 @@
+Initial release — what a branch spent
+
+What a branch spent, on what, and who recorded it.
+
+The category is a plain string, not an enum or a foreign key. The list grows,
+and summaries group by whatever is on the record — so adding a category never
+touches an expense already recorded, and never needs a migration.
+
+Money is integer shillings everywhere. A float is refused at the boundary
+rather than rounded, because a rounding that happens quietly is a rounding
+nobody can audit.

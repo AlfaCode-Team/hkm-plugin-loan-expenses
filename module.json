@@ -1,0 +1,72 @@
+{
+    "name": "loan-expenses",
+    "version": "1.0.0",
+    "kernel": "^1.21.0",
+    "solves": "expenses.management",
+    "type": "module",
+    "requires": [
+        "database.management",
+        "sync.offline",
+        "organisation.structure"
+    ],
+    "exposes": [
+        "Plugins\\LoanExpenses\\API\\Contracts\\ExpenseServiceContract"
+    ],
+    "routePrefix": "/api/expenses",
+    "routeFilters": [
+        "auth"
+    ],
+    "routes": [
+        {
+            "method": "GET",
+            "path": "",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@index",
+            "name": "expenses.index"
+        },
+        {
+            "method": "POST",
+            "path": "",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@store",
+            "name": "expenses.store"
+        },
+        {
+            "method": "GET",
+            "path": "/reports/by-category",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@reportByCategory",
+            "name": "expenses.report.category"
+        },
+        {
+            "method": "GET",
+            "path": "/reports/by-branch",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@reportByBranch",
+            "name": "expenses.report.branch"
+        },
+        {
+            "method": "GET",
+            "path": "/reports/daily",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@reportDaily",
+            "name": "expenses.report.daily"
+        },
+        {
+            "method": "GET",
+            "path": "/{id:num}",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@show",
+            "name": "expenses.show"
+        },
+        {
+            "method": "PUT",
+            "path": "/{id:num}",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@update",
+            "name": "expenses.update"
+        },
+        {
+            "method": "DELETE",
+            "path": "/{id:num}",
+            "handler": "Plugins\\LoanExpenses\\Infrastructure\\Http\\Controllers\\ExpenseController@destroy",
+            "name": "expenses.destroy"
+        }
+    ],
+    "emits": [],
+    "documentation": "Operating expenses a branch pays out of its cash: boda fares, airtime, rent, staff lunch. The category is a closed enum so a typo cannot fragment reports. Money is whole UGX. Every write takes a sync revision; deletes are tombstones and tombstoned rows are excluded from listings and totals alike.",
+    "config": []
+}
